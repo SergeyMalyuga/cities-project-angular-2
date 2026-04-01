@@ -1,11 +1,12 @@
-import { OffersState } from './offers.state';
-import { UserState } from './user.state';
-import { CityState } from './city.state';
-import { FavoriteOffersState } from './favorite-offers.state';
+import {OffersState} from './offers.state';
+import {UserState} from './user.state';
+import {CityState} from './city.state';
+import {FavoriteOffersState} from './favorite-offers.state';
+import {City} from './city';
 
 export interface AppState {
   /*  favoriteOffers: FavoriteOffersState;
-  user: UserState;
-  city: CityState;*/
+  user: UserState;*/
+  city: City;
   offers: OffersState;
 }
