@@ -14,3 +14,9 @@ export const selectOffersByCity = createSelector(
     Object.values(offersState.entities).filter(offer => offer !== undefined)
       .filter(offer => offer.city.name === cityState.name)
 );
+
+
+export const selectCity = createSelector(
+  selectCityState,
+  city => city
+)
