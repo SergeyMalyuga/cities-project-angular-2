@@ -1,0 +1,20 @@
+import {Directive, HostListener, inject, Input} from '@angular/core';
+import {City} from '../../core/models/city';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {changeCity} from '../../store/city/actions/city.actions';
+
+@Directive({
+  selector: '[appSelectCity]',
+})
+export class SelectCityDirective {
+  @Input({required: true}) city!: City;
+
+  private store = inject(Store<AppState>);
+
+  @HostListener('click', ['$event'])
+  onClick(evt: MouseEvent) {
+    evt.preventDefault();
+    this.store.dispatch(changeCity({city: this.city}))
+  }
+}
