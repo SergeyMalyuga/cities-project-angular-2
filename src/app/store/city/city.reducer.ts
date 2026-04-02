@@ -7,6 +7,6 @@ const initialState: City = DEFAULT_CITY;
 
 export const cityReducer = createReducer(initialState,
   on(changeCity, (state, {city}) => ({
-    ...state, city
+    ...state, ...city
   }))
 );
