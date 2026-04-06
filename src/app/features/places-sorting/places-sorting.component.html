@@ -1,8 +1,8 @@
 <form class="places__sorting" action="#" method="get">
   <span class="places__sorting-caption">Sort by</span>
   <span appToggle (toggled)="toggleOptions()" (closed)="closeOptions()" class="places__sorting-type" tabindex="0">
-              Popular
-              <svg class="places__sorting-arrow" width="7" height="4">
+              {{ currentSortType }}
+    <svg class="places__sorting-arrow" width="7" height="4">
                 <use xlink:href="#icon-arrow-select"></use>
               </svg>
             </span>
@@ -11,11 +11,13 @@
     class="places__options places__options--custom"
     [ngClass]="{'places__options--opened': isOptionsOpen()}"
   >
-    <li class="places__option places__option--active" tabindex="0">
-      Popular
-    </li>
-    <li class="places__option" tabindex="0">Price: low to high</li>
-    <li class="places__option" tabindex="0">Price: high to low</li>
-    <li class="places__option" tabindex="0">Top rated first</li>
+    @for (type of Object.values(SortType); track type) {
+      <li appSelectSort (sortSelected)="onSortSelected($event)"
+          [sortType]="type"
+          class="places__option"
+          [ngClass]="{'places__option--active': currentSortType === type}"
+          tabindex="0">{{ type }}
+      </li>
+    }
   </ul>
 </form>
