@@ -31,7 +31,9 @@
           </div>
         </section>
         <div class="cities__right-section">
-          <section class="cities__map map"></section>
+          <section class="cities__map map">
+            <app-map [currentCity]="DEFAULT_CITY" [offers]="offers() | sortOffersBy: currentSortType()" [activeCard]="null"/>
+          </section>
         </div>
       </div>
     </div>
