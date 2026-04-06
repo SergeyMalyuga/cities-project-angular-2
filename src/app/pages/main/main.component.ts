@@ -22,5 +22,9 @@ export class MainComponent {
 
   public offers = this.store.selectSignal(selectOffersByCity);
   public currentCity = this.store.selectSignal(selectCity);
-  public sortType = signal<SortType>(SortType.POPULAR);
+  public currentSortType = signal<SortType>(SortType.POPULAR);
+
+public changeSort(sortType: SortType) {
+  this.currentSortType.set(sortType);
+}
 }
