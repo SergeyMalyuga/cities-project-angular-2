@@ -10,6 +10,7 @@ import {NgClass} from '@angular/common';
 import {PlacesSortingComponent} from '../../features/places-sorting/places-sorting.component';
 import {SortOffersByPipe} from './pipes/sort-offers-by.pipe';
 import {MapComponent} from '../../shared/components/map/map.component';
+import {OfferPreview} from '../../core/models/offers';
 
 @Component({
   selector: 'app-main',
@@ -24,10 +25,13 @@ export class MainComponent {
   public offers = this.store.selectSignal(selectOffersByCity);
   public currentCity = this.store.selectSignal(selectCity);
   public currentSortType = signal<SortType>(SortType.POPULAR);
+  public activeCard = signal<OfferPreview | null>(null);
 
-public changeSort(sortType: SortType) {
-  this.currentSortType.set(sortType);
-}
+  public changeSort(sortType: SortType) {
+    this.currentSortType.set(sortType);
+  }
 
-  protected readonly DEFAULT_CITY = DEFAULT_CITY;
+  public changeActiveCard(offer: OfferPreview | null): void {
+    this.activeCard.set(offer);
+  }
 }
