@@ -66,16 +66,16 @@ export const CITY_LOCATIONS: City[] = [
   {
     name: 'Amsterdam',
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude:  52.37006332827682,
+      longitude: 4.8958540704711595,
       zoom: 10,
     },
   },
   {
     name: 'Hamburg',
     location: {
-      latitude: 53.5753,
-      longitude: 10.0153,
+      latitude: 53.553841,
+      longitude: 9.991650,
       zoom: 10,
     },
   },
