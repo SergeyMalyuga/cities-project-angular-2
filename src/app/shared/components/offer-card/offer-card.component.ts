@@ -2,12 +2,15 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {OfferPreview} from '../../../core/models/offers';
 import {TitleCasePipe} from '@angular/common';
 import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
+import {RouterLink} from '@angular/router';
+import {AppRoute} from '../../../core/constants/const';
 
 @Component({
   selector: 'app-offer-card',
   imports: [
     TitleCasePipe,
-    HoverTrackerDirective
+    HoverTrackerDirective,
+    RouterLink
   ],
   templateUrl: './offer-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,4 +27,6 @@ export class OfferCardComponent {
       this.hovered.emit(null);
     }
   }
+
+  protected readonly AppRoute = AppRoute;
 }
