@@ -5,11 +5,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, combineLatest, EMPTY, filter, map, switchMap} from 'rxjs';
 import {OfferService} from '../../core/services/offer.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {TitleCasePipe} from '@angular/common';
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, TitleCasePipe],
 })
 export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
@@ -36,4 +37,6 @@ export class OfferComponent implements OnInit {
       }
     );
   }
+
+  protected readonly Math = Math;
 }
