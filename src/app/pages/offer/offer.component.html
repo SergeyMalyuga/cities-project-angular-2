@@ -81,7 +81,9 @@
           <app-reviews [comments]="comments()"/>
         </div>
       </div>
-      <section class="offer__map map"></section>
+      <section class="offer__map map">
+        <app-map [offers]="neighborOffers()" [currentCity]="offer()?.city ?? DEFAULT_CITY" [activeCard]="null"></app-map>
+      </section>
     </section>
     <div class="container">
       <section class="near-places places">

@@ -10,11 +10,13 @@ import {ReviewsComponent} from '../../features/reviews/reviews.component';
 import {ReviewsService} from '../../core/services/comment.service';
 import {Comment} from '../../core/models/comments';
 import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
+import {MapComponent} from '../../shared/components/map/map.component';
+import {DEFAULT_CITY} from '../../core/constants/const';
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent, OfferCardComponent, SlicePipe],
+  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent, OfferCardComponent, SlicePipe, MapComponent],
 })
 export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
@@ -62,4 +64,5 @@ export class OfferComponent implements OnInit {
   }
 
   protected readonly Math = Math;
+  protected readonly DEFAULT_CITY = DEFAULT_CITY;
 }
