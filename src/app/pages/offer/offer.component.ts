@@ -2,11 +2,13 @@ import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
 import {HeaderComponent} from '../../shared/components/header/header.component';
 import {Offer} from '../../core/models/offers';
 import {ActivatedRoute, Router} from '@angular/router';
-import {catchError, combineLatest, EMPTY, filter, map, switchMap} from 'rxjs';
+import {catchError, combineLatest, distinctUntilChanged, EMPTY, filter, map, merge, of, Subject, switchMap} from 'rxjs';
 import {OfferService} from '../../core/services/offer.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TitleCasePipe} from '@angular/common';
 import {ReviewsComponent} from '../../features/reviews/reviews.component';
+import {ReviewsService} from '../../core/services/comment.service';
+import {Comment} from '../../core/models/comments';
 
 @Component({
   selector: 'app-offer',
@@ -17,10 +19,13 @@ export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private offerService = inject(OfferService);
+  private reviewsService = inject(ReviewsService)
+  private refreshReviews = new Subject<void>();
   private destroyRef = inject(DestroyRef);
 
   public offer = signal<Offer | null>(null);
   public offerId = signal<string | null>(null);
+  public comments = signal<Comment[]>([]);
 
   public ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(map(params =>
@@ -31,10 +36,23 @@ export class OfferComponent implements OnInit {
           this.router.navigate(['/', '**']);
           return EMPTY;
         }));
-        return combineLatest({offer: offers$})
+        const comments$ = merge(
+          this.reviewsService.getComments(id),
+          this.refreshReviews.pipe(switchMap(() => this.reviewsService.getComments(id)))
+            .pipe(
+              distinctUntilChanged(
+                (prev, curr) =>
+                  prev.length === curr.length &&
+                  prev.every((comment, index) => comment.id === curr[index].id),
+              ),
+              catchError(() => of([])),
+            )
+        );
+        return combineLatest({offer: offers$, comments: comments$})
       })).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
         this.offer.set(result.offer);
         this.offerId.set(result.offer.id);
+        this.comments.set(result.comments);
       }
     );
   }
