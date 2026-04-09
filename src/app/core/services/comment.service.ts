@@ -11,12 +11,12 @@ import {defaultHttpPipe} from '../../utils/rxjs-operators';
 export class ReviewsService {
   private http = inject(HttpClient);
 
-  public getComments(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}`).pipe(...defaultHttpPipe<Comment[]>());
+  public getComments(offerId: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`).pipe(...defaultHttpPipe<Comment[]>());
   }
 
-  public postComment(comment: string, rating: number): Observable<Comment> {
-    return this.http.post<Comment>(`${BASE_URL}/${APIRoute.COMMENTS}`, {
+  public postComment(comment: string, rating: number, offerId: string): Observable<Comment> {
+    return this.http.post<Comment>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`, {
       comment,
       rating
     }).pipe(...defaultHttpPipe<Comment>());
