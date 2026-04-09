@@ -6,11 +6,12 @@ import {catchError, combineLatest, EMPTY, filter, map, switchMap} from 'rxjs';
 import {OfferService} from '../../core/services/offer.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TitleCasePipe} from '@angular/common';
+import {ReviewsComponent} from '../../features/reviews/reviews.component';
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  imports: [HeaderComponent, TitleCasePipe],
+  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent],
 })
 export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
