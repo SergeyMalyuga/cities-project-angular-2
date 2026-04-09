@@ -20,7 +20,7 @@ export class OfferService {
 
   public getNearbyOffers(offerId: string): Observable<OfferPreview[]> {
     return this.http.get<OfferPreview[]>(
-      `${BASE_URL}/${APIRoute.OFFERS}/${offerId}`,
+      `${BASE_URL}/${APIRoute.OFFERS}/${offerId}/nearby`,
     );
   }
 }

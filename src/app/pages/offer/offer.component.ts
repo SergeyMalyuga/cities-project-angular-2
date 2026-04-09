@@ -1,19 +1,20 @@
 import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
 import {HeaderComponent} from '../../shared/components/header/header.component';
-import {Offer} from '../../core/models/offers';
+import {Offer, OfferPreview} from '../../core/models/offers';
 import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, combineLatest, distinctUntilChanged, EMPTY, filter, map, merge, of, Subject, switchMap} from 'rxjs';
 import {OfferService} from '../../core/services/offer.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {TitleCasePipe} from '@angular/common';
+import {SlicePipe, TitleCasePipe} from '@angular/common';
 import {ReviewsComponent} from '../../features/reviews/reviews.component';
 import {ReviewsService} from '../../core/services/comment.service';
 import {Comment} from '../../core/models/comments';
+import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent],
+  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent, OfferCardComponent, SlicePipe],
 })
 export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
@@ -24,6 +25,7 @@ export class OfferComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   public offer = signal<Offer | null>(null);
+  public neighborOffers = signal<OfferPreview[]>([]);
   public offerId = signal<string | null>(null);
   public comments = signal<Comment[]>([]);
 
@@ -48,11 +50,13 @@ export class OfferComponent implements OnInit {
               catchError(() => of([])),
             )
         );
-        return combineLatest({offer: offers$, comments: comments$})
+        const neighborOffers$ = this.offerService.getNearbyOffers(id).pipe(catchError(() => of([])));
+        return combineLatest({offer: offers$, comments: comments$, neighborOffers: neighborOffers$});
       })).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
         this.offer.set(result.offer);
         this.offerId.set(result.offer.id);
         this.comments.set(result.comments);
+        this.neighborOffers.set(result.neighborOffers);
       }
     );
   }
