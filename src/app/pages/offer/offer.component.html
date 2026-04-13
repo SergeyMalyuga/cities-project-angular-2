@@ -82,7 +82,7 @@
         </div>
       </div>
       <section class="offer__map map">
-        <app-map [offers]="neighborOffers()" [currentCity]="offer()?.city ?? DEFAULT_CITY" [activeCard]="null"></app-map>
+        <app-map [offers]="neighborOffers() | slice: 0: 3" [currentCity]="offer()?.city ?? DEFAULT_CITY" [activeCard]="null"></app-map>
       </section>
     </section>
     <div class="container">
