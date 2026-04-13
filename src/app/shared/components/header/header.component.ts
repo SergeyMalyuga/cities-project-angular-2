@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../../core/constants/const';
+import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -10,5 +13,9 @@ import {AppRoute} from '../../../core/constants/const';
   ]
 })
 export class HeaderComponent {
-  protected readonly AppRoute = AppRoute;
+  private store = inject(Store<AppState>)
+
+  public readonly AppRoute = AppRoute;
+  public authStatus = this.store.selectSignal(selectAuthStatus);
+  protected readonly AuthorizationStatus = AuthorizationStatus;
 }
