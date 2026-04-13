@@ -4,12 +4,15 @@ import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../core/models/app.state';
 import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
+import {AccessibilityClickDirective} from '../../directives/accessibility-click.directive';
+import {logout} from '../../../store/user/actions/user.actions';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   imports: [
-    RouterLink
+    RouterLink,
+    AccessibilityClickDirective
   ]
 })
 export class HeaderComponent {
@@ -18,4 +21,10 @@ export class HeaderComponent {
   public readonly AppRoute = AppRoute;
   public authStatus = this.store.selectSignal(selectAuthStatus);
   protected readonly AuthorizationStatus = AuthorizationStatus;
+
+  public signOut(): void {
+    if (this.authStatus() === AuthorizationStatus.AUTH) {
+      this.store.dispatch(logout());
+    }
+  }
 }
