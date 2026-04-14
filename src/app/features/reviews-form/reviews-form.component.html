@@ -108,6 +108,7 @@
       <b class="reviews__text-amount">50 characters</b>.
     </p>
     <button
+      (click)="onSubmit()"
       class="reviews__submit form__submit button"
       type="submit"
       [disabled]="reviewGroup.invalid"
