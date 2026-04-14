@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
+import {AppRoute, AuthorizationStatus, CITY_LOCATIONS} from '../../core/constants/const';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Credentials} from '../../core/models/credentials';
 import {Store} from '@ngrx/store';
@@ -10,13 +10,16 @@ import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
 import {filter, take} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {loadOffers} from '../../store/offer/actions/offer.actions';
+import {City} from '../../core/models/city';
+import {SelectCityDirective} from '../../shared/directives/select-city.directive';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   imports: [
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectCityDirective
   ]
 })
 export class LoginComponent implements OnInit {
@@ -30,6 +33,7 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$')]],
   });
+  public randomCity = this.getRandomCity();
 
   public ngOnInit(): void {
     this.store.select(selectAuthStatus).pipe(
@@ -49,5 +53,14 @@ export class LoginComponent implements OnInit {
       const credentials: Credentials = {email, password};
       this.store.dispatch(login({credentials}));
     }
+  }
+
+  private getRandomCity(): City {
+    const index = Math.floor(Math.random() * CITY_LOCATIONS.length);
+    return CITY_LOCATIONS[index];
+  }
+
+  public onCitySelected(): void {
+    this.router.navigate([AppRoute.MAIN]);
   }
 }
