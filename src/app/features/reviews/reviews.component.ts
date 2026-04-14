@@ -5,11 +5,13 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
 import {AuthorizationStatus} from '../../core/constants/const';
+import {ReviewsFormComponent} from '../reviews-form/reviews-form.component';
 
 @Component({
   selector: 'app-reviews',
   imports: [
-    DatePipe
+    DatePipe,
+    ReviewsFormComponent
   ],
   templateUrl: './reviews.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
