@@ -12,9 +12,7 @@ import {Comment} from '../../core/models/comments';
 import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
 import {MapComponent} from '../../shared/components/map/map.component';
 import {DEFAULT_CITY} from '../../core/constants/const';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
+import {NewComment} from '../../core/models/new-comment';
 
 @Component({
   selector: 'app-offer',
@@ -26,7 +24,7 @@ export class OfferComponent implements OnInit {
   private router = inject(Router);
   private offerService = inject(OfferService);
   private reviewsService = inject(ReviewsService)
-  private refreshReviews = new Subject<void>();
+  private refreshReviews$ = new Subject<void>();
   private destroyRef = inject(DestroyRef);
 
   public offer = signal<Offer | null>(null);
@@ -47,7 +45,7 @@ export class OfferComponent implements OnInit {
         }));
         const comments$ = merge(
           this.reviewsService.getComments(id),
-          this.refreshReviews.pipe(switchMap(() => this.reviewsService.getComments(id)))
+          this.refreshReviews$.pipe(switchMap(() => this.reviewsService.getComments(id)))
             .pipe(
               distinctUntilChanged(
                 (prev, curr) =>
@@ -66,5 +64,12 @@ export class OfferComponent implements OnInit {
         this.neighborOffers.set(result.neighborOffers);
       }
     );
+  }
+
+  public postComment(comment: NewComment) {
+    const id = this.offerId();
+    if (id) {
+      this.reviewsService.postComment(comment.comment, Number(comment.rating), id).subscribe(() => this.refreshReviews$.next());
+    }
   }
 }

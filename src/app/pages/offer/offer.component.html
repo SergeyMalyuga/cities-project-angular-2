@@ -78,7 +78,7 @@
               </p>
             </div>
           </div>
-          <app-reviews [comments]="comments()"/>
+          <app-reviews (submitted)="postComment($event)" [comments]="comments()"/>
         </div>
       </div>
       <section class="offer__map map">
