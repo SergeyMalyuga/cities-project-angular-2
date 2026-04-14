@@ -12,6 +12,9 @@ import {Comment} from '../../core/models/comments';
 import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
 import {MapComponent} from '../../shared/components/map/map.component';
 import {DEFAULT_CITY} from '../../core/constants/const';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
 
 @Component({
   selector: 'app-offer',
@@ -30,6 +33,8 @@ export class OfferComponent implements OnInit {
   public neighborOffers = signal<OfferPreview[]>([]);
   public offerId = signal<string | null>(null);
   public comments = signal<Comment[]>([]);
+  public readonly Math = Math;
+  public readonly DEFAULT_CITY = DEFAULT_CITY;
 
   public ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(map(params =>
@@ -62,7 +67,4 @@ export class OfferComponent implements OnInit {
       }
     );
   }
-
-  protected readonly Math = Math;
-  protected readonly DEFAULT_CITY = DEFAULT_CITY;
 }
