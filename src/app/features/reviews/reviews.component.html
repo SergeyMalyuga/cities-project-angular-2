@@ -3,7 +3,7 @@
       Reviews &middot; <span class="reviews__amount">{{comments.length}}</span>
   </h2>
   <ul class="reviews__list">
-    @for (comment of comments; track comment.id) {
+    @for (comment of comments | sortByDate; track comment.id) {
       <li class="reviews__item">
         <div class="reviews__user user">
           <div class="reviews__avatar-wrapper user__avatar-wrapper">
@@ -32,11 +32,10 @@
           >
         </div>
       </li>
-
     }
   </ul>
   @if (authStatus() === AuthorizationStatus.AUTH) {
-   <app-reviews-form/>
+   <app-reviews-form (submitted)="onSubmitted($event)"/>
   }
 </section>
 
