@@ -13,11 +13,12 @@ import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.
 import {MapComponent} from '../../shared/components/map/map.component';
 import {DEFAULT_CITY} from '../../core/constants/const';
 import {NewComment} from '../../core/models/new-comment';
+import {LoaderComponent} from '../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.component.html',
-  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent, OfferCardComponent, SlicePipe, MapComponent],
+  imports: [HeaderComponent, TitleCasePipe, ReviewsComponent, OfferCardComponent, SlicePipe, MapComponent, LoaderComponent],
 })
 export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);

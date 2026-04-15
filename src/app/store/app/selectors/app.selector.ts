@@ -19,4 +19,9 @@ export const selectOffersByCity = createSelector(
 export const selectCity = createSelector(
   selectCityState,
   city => city
+);
+
+export const selectIsOfferLoading = createSelector(
+  selectOffersState,
+  state => state.isLoading
 )
