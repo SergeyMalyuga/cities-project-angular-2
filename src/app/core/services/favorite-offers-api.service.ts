@@ -9,7 +9,7 @@ import {defaultHttpPipe} from '../../utils/rxjs-operators';
 @Injectable({
   providedIn: 'root'
 })
-export class FavoriteOffersService {
+export class FavoriteOffersApiService {
   private http = inject(HttpClient);
 
   public getOffers(): Observable<OfferPreview[]> {
