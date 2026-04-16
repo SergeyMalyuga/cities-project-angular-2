@@ -6,6 +6,7 @@ import {AppState} from '../../../core/models/app.state';
 import {selectAuthStatus, selectUserEmail} from '../../../store/user/selectors/user.selectors';
 import {AccessibilityClickDirective} from '../../directives/accessibility-click.directive';
 import {logout} from '../../../store/user/actions/user.actions';
+import {selectFavoriteOffersTotal} from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ export class HeaderComponent {
   public readonly AuthorizationStatus = AuthorizationStatus;
   public authStatus = this.store.selectSignal(selectAuthStatus);
   public email = this.store.selectSignal(selectUserEmail);
+  public favoriteOffersTotal = this.store.selectSignal(selectFavoriteOffersTotal);
 
   public signOut(): void {
     if (this.authStatus() === AuthorizationStatus.AUTH) {
