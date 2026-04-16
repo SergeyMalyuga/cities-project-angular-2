@@ -4,7 +4,7 @@ import {createReducer, on} from '@ngrx/store';
 import {
   loadFavoriteOffers,
   loadFavoritesOffersFailure,
-  loadFavoritesOffersSuccess
+  loadFavoritesOffersSuccess, toggleFavoriteStatus, toggleFavoriteStatusFailure, toggleFavoriteStatusSuccess
 } from './actions/favorite-offer.actions';
 import {FavoriteOffersState} from '../../core/models/favorite-offers.state';
 
@@ -23,6 +23,19 @@ export const favoriteOffersReducer = createReducer(
     favoriteOfferAdapter.setAll(offers, {...state, isLoading: false, error: null}),
   ),
   on(loadFavoritesOffersFailure, (state, {error}) => ({
+    ...state, isLoading: false, error
+  })),
+  on(toggleFavoriteStatus, state => ({
+    ...state, isLoading: true
+  })),
+  on(toggleFavoriteStatusSuccess, (state, {offer}) => {
+    if (offer.isFavorite) {
+      return favoriteOfferAdapter.addOne(offer, {...state, isLoading: false, error: null});
+    } else {
+      return favoriteOfferAdapter.removeOne(offer.id, {...state, isLoading: false, error: null});
+    }
+  }),
+  on(toggleFavoriteStatusFailure, (state, {error}) => ({
     ...state, isLoading: false, error
   }))
 )
