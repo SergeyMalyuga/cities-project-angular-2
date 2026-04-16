@@ -8,4 +8,9 @@ const favoriteOfferSelectors = favoriteOfferAdapter.getSelectors();
 export const selectFavoriteOffersTotal = createSelector(
   selectFavoriteOfferState,
   favoriteOfferSelectors.selectTotal
-);
+)
+
+export const selectIsFavoriteOffersIsLoading = createSelector(
+  selectFavoriteOfferState,
+  state => state.isLoading
+)
