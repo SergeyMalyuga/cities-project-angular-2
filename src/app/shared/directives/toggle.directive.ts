@@ -20,7 +20,7 @@ export class ToggleDirective {
       evt.stopPropagation();
       this.toggled.emit();
     } else if (evt.key === 'Escape') {
-        this.closed.emit();
+      this.closed.emit();
     }
   }
 }

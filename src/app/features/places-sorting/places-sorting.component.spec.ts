@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlacesSortingComponent } from './places-sorting.component';
+import {PlacesSortingComponent} from './places-sorting.component';
 
 describe('PlacesSortingComponent', () => {
   let component: PlacesSortingComponent;
@@ -8,9 +8,8 @@ describe('PlacesSortingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlacesSortingComponent]
-    })
-    .compileComponents();
+      imports: [PlacesSortingComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PlacesSortingComponent);
     component = fixture.componentInstance;

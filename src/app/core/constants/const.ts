@@ -1,4 +1,4 @@
-import { City } from '../models/city';
+import {City} from '../models/city';
 
 export enum AppRoute {
   MAIN = '',
@@ -66,7 +66,7 @@ export const CITY_LOCATIONS: City[] = [
   {
     name: 'Amsterdam',
     location: {
-      latitude:  52.37006332827682,
+      latitude: 52.37006332827682,
       longitude: 4.8958540704711595,
       zoom: 10,
     },
@@ -75,7 +75,7 @@ export const CITY_LOCATIONS: City[] = [
     name: 'Hamburg',
     location: {
       latitude: 53.553841,
-      longitude: 9.991650,
+      longitude: 9.99165,
       zoom: 10,
     },
   },

@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree,} from '@angular/router';
 import {filter, map, Observable, take} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../models/app.state';
@@ -13,17 +13,22 @@ export class AuthGuard implements CanActivate {
   private router = inject(Router);
   private store = inject(Store<AppState>);
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+  public canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ): Observable<boolean | UrlTree> {
     return this.store.select(selectAuthStatus).pipe(
-      filter(status => status !== AuthorizationStatus.UNKNOWN),
+      filter((status) => status !== AuthorizationStatus.UNKNOWN),
       take(1),
-      map(status => {
+      map((status) => {
         if (status === AuthorizationStatus.AUTH) {
           return true;
         } else {
-         return this.router.createUrlTree([AppRoute.LOGIN], {queryParams: {redirectTo: state.url}})
+          return this.router.createUrlTree([AppRoute.LOGIN], {
+            queryParams: { redirectTo: state.url },
+          });
         }
-      })
-    )
+      }),
+    );
   }
 }

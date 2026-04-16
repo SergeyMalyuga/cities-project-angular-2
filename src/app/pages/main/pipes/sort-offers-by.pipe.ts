@@ -3,7 +3,7 @@ import {OfferPreview} from '../../../core/models/offers';
 import {SortType} from '../../../core/constants/const';
 
 @Pipe({
-  name: 'sortOffersBy'
+  name: 'sortOffersBy',
 })
 export class SortOffersByPipe implements PipeTransform {
   transform(offers: OfferPreview[] | undefined, sortType: SortType) {

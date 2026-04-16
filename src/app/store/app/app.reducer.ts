@@ -9,5 +9,5 @@ export const appReducer: ActionReducerMap<AppState> = {
   offers: offerReducer,
   city: cityReducer,
   user: userReducer,
-  favoriteOffers: favoriteOffersReducer
+  favoriteOffers: favoriteOffersReducer,
 };

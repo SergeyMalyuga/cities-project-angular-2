@@ -12,14 +12,41 @@ export class FavoriteOfferEffects {
   private actions$ = inject(Actions);
   private favoriteOffersService = inject(FavoriteOffersApiService);
 
-  public loadFavoriteOffers$ = createEffect(() => this.actions$
-    .pipe(ofType(FavoriteOffers.loadFavoriteOffers), switchMap(() => this.favoriteOffersService.getOffers()
-      .pipe(map(offers => FavoriteOffers.loadFavoritesOffersSuccess({offers})),
-        catchError((error: HttpErrorResponse) => of(FavoriteOffers.loadFavoritesOffersFailure({error: error.message})))))))
+  public loadFavoriteOffers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FavoriteOffers.loadFavoriteOffers),
+      switchMap(() =>
+        this.favoriteOffersService.getOffers().pipe(
+          map((offers) =>
+            FavoriteOffers.loadFavoritesOffersSuccess({ offers }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              FavoriteOffers.loadFavoritesOffersFailure({
+                error: error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 
-  public toggleFavoriteOffer$ = createEffect(() => this.actions$
-    .pipe(ofType(FavoriteOffers.toggleFavoriteStatus),
-      switchMap(({offerId, isFavorite}) =>
-        this.favoriteOffersService.toggleFavorite(offerId, isFavorite)
-          .pipe(map(offer => FavoriteOffers.toggleFavoriteStatusSuccess({offer})), catchError((error: HttpErrorResponse) => of(FavoriteOffers.toggleFavoriteStatusFailure({error: error.message})))))))
+  public toggleFavoriteOffer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FavoriteOffers.toggleFavoriteStatus),
+      switchMap(({ offerId, isFavorite }) =>
+        this.favoriteOffersService.toggleFavorite(offerId, isFavorite).pipe(
+          map((offer) => FavoriteOffers.toggleFavoriteStatusSuccess({ offer })),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              FavoriteOffers.toggleFavoriteStatusFailure({
+                error: error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }

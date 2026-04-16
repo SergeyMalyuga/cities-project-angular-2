@@ -18,19 +18,27 @@
             @if (authStatus() === AuthorizationStatus.AUTH) {
               <a class="header__nav-link header__nav-link--profile" href="#">
                 <div class="header__avatar-wrapper user__avatar-wrapper"></div>
-                <span class="header__user-name user__name"
-                >{{email()}}</span
-                >
-                <span class="header__favorite-count">{{favoriteOffersTotal()}}</span>
+                <span class="header__user-name user__name">{{ email() }}</span>
+                <span class="header__favorite-count">{{
+                  favoriteOffersTotal()
+                }}</span>
               </a>
             }
           </li>
           <li class="header__nav-item">
-            <a class="header__nav-link"
-               [routerLink]="authStatus() === AuthorizationStatus.AUTH ? ['/'] : ['/', AppRoute.LOGIN]"
-            appAccessibilityClick (accessibilityClicked)="signOut()"
+            <a
+              class="header__nav-link"
+              [routerLink]="
+                authStatus() === AuthorizationStatus.AUTH
+                  ? ['/']
+                  : ['/', AppRoute.LOGIN]
+              "
+              appAccessibilityClick
+              (accessibilityClicked)="signOut()"
             >
-              <span class="header__signout">{{authStatus() === AuthorizationStatus.AUTH ? 'Sign out' : 'Login'}}</span>
+              <span class="header__signout">{{
+                authStatus() === AuthorizationStatus.AUTH ? "Sign out" : "Login"
+              }}</span>
             </a>
           </li>
         </ul>

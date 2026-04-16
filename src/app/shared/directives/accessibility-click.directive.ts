@@ -8,7 +8,7 @@ export class AccessibilityClickDirective {
 
   @HostListener('click')
   onClick() {
-    this.accessibilityClicked.emit()
+    this.accessibilityClicked.emit();
   }
 
   @HostListener('keydown', ['$event'])

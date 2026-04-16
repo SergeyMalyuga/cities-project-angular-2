@@ -12,7 +12,7 @@ import {checkAuth} from './store/user/actions/user.actions';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  private store = inject(Store<AppState>)
+  private store = inject(Store<AppState>);
 
   public ngOnInit(): void {
     this.store.dispatch(loadOffers());

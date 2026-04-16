@@ -5,10 +5,10 @@ const selectUserState = createFeatureSelector<AppState['user']>('user');
 
 export const selectAuthStatus = createSelector(
   selectUserState,
-  user => user.authorizationStatus
+  (user) => user.authorizationStatus,
 );
 
 export const selectUserEmail = createSelector(
   selectUserState,
-  state => state.user?.email
+  (state) => state.user?.email,
 );

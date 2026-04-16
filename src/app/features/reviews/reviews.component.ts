@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output,} from '@angular/core';
 import {Comment} from '../../core/models/comments';
 import {DatePipe} from '@angular/common';
 import {Store} from '@ngrx/store';
@@ -11,17 +11,13 @@ import {SortByDatePipe} from './pipes/sort-by-date.pipe';
 
 @Component({
   selector: 'app-reviews',
-  imports: [
-    DatePipe,
-    ReviewsFormComponent,
-    SortByDatePipe
-  ],
+  imports: [DatePipe, ReviewsFormComponent, SortByDatePipe],
   templateUrl: './reviews.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewsComponent {
   @Output() submitted = new EventEmitter<NewComment>();
-  @Input({required: true}) comments!: Comment[];
+  @Input({ required: true }) comments!: Comment[];
 
   private store = inject(Store<AppState>);
 

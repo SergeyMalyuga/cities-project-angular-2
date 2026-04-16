@@ -1,4 +1,8 @@
-<article appHoverTracker (hovered)="onHovered($event)" class="cities__card place-card">
+<article
+  appHoverTracker
+  (hovered)="onHovered($event)"
+  class="cities__card place-card"
+>
   @if (offer.isPremium) {
     <div class="place-card__mark">
       <span>Premium</span>
@@ -8,7 +12,7 @@
     <a [routerLink]="[AppRoute.OFFER, offer.id]">
       <img
         class="place-card__image"
-        src="{{offer.previewImage}}"
+        src="{{ offer.previewImage }}"
         width="260"
         height="200"
         alt="Place image"
@@ -24,15 +28,13 @@
       <button
         (click)="changeFavoriteStatus()"
         class="place-card__bookmark-button button"
-        [class.place-card__bookmark-button--active] = "authStatus() === AuthorizationStatus.AUTH && offer.isFavorite"
+        [class.place-card__bookmark-button--active]="
+          authStatus() === AuthorizationStatus.AUTH && offer.isFavorite
+        "
         type="button"
         [disabled]="isFavoriteOfferLoading()"
       >
-        <svg
-          class="place-card__bookmark-icon"
-          width="18"
-          height="19"
-        >
+        <svg class="place-card__bookmark-icon" width="18" height="19">
           <use xlink:href="#icon-bookmark"></use>
         </svg>
         <span class="visually-hidden">To bookmarks</span>
@@ -45,11 +47,8 @@
       </div>
     </div>
     <h2 class="place-card__name">
-      <a [routerLink]="[AppRoute.OFFER, offer.id]"
-      >{{offer.title}}</a
-      >
+      <a [routerLink]="[AppRoute.OFFER, offer.id]">{{ offer.title }}</a>
     </h2>
     <p class="place-card__type">{{ offer.type | titlecase }}</p>
   </div>
 </article>
-

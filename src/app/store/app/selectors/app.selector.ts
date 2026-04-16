@@ -11,17 +11,14 @@ export const selectOffersByCity = createSelector(
   selectOffersState,
   selectCityState,
   (offersState, cityState) =>
-    Object.values(offersState.entities).filter(offer => offer !== undefined)
-      .filter(offer => offer.city.name === cityState.name)
+    Object.values(offersState.entities)
+      .filter((offer) => offer !== undefined)
+      .filter((offer) => offer.city.name === cityState.name),
 );
 
-
-export const selectCity = createSelector(
-  selectCityState,
-  city => city
-);
+export const selectCity = createSelector(selectCityState, (city) => city);
 
 export const selectIsOfferLoading = createSelector(
   selectOffersState,
-  state => state.isLoading
-)
+  (state) => state.isLoading,
+);

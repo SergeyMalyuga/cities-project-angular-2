@@ -1,22 +1,33 @@
 <form class="places__sorting" action="#" method="get">
   <span class="places__sorting-caption">Sort by</span>
-  <span appToggle (toggled)="toggleOptions()" (closed)="closeOptions()" class="places__sorting-type" tabindex="0">
-              {{ currentSortType }}
+  <span
+    appToggle
+    (toggled)="toggleOptions()"
+    (closed)="closeOptions()"
+    class="places__sorting-type"
+    tabindex="0"
+  >
+    {{ currentSortType }}
     <svg class="places__sorting-arrow" width="7" height="4">
-                <use xlink:href="#icon-arrow-select"></use>
-              </svg>
-            </span>
+      <use xlink:href="#icon-arrow-select"></use>
+    </svg>
+  </span>
   <ul
-    appClickOutside (outsideClicked)="isOptionsOpen() && closeOptions()"
+    appClickOutside
+    (outsideClicked)="isOptionsOpen() && closeOptions()"
     class="places__options places__options--custom"
-    [ngClass]="{'places__options--opened': isOptionsOpen()}"
+    [ngClass]="{ 'places__options--opened': isOptionsOpen() }"
   >
     @for (type of Object.values(SortType); track type) {
-      <li appSelectSort (sortSelected)="onSortSelected($event)"
-          [sortType]="type"
-          class="places__option"
-          [ngClass]="{'places__option--active': currentSortType === type}"
-          tabindex="0">{{ type }}
+      <li
+        appSelectSort
+        (sortSelected)="onSortSelected($event)"
+        [sortType]="type"
+        class="places__option"
+        [ngClass]="{ 'places__option--active': currentSortType === type }"
+        tabindex="0"
+      >
+        {{ type }}
       </li>
     }
   </ul>

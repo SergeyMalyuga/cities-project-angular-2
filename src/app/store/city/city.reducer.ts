@@ -5,8 +5,10 @@ import {changeCity} from './actions/city.actions';
 
 const initialState: City = DEFAULT_CITY;
 
-export const cityReducer = createReducer(initialState,
-  on(changeCity, (state, {city}) => ({
-    ...state, ...city
-  }))
+export const cityReducer = createReducer(
+  initialState,
+  on(changeCity, (state, { city }) => ({
+    ...state,
+    ...city,
+  })),
 );

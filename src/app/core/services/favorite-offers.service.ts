@@ -7,7 +7,7 @@ import {toggleFavoriteStatus} from '../../store/favorite-offer/actions/favorite-
 import {Router} from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoriteOffersService {
   private store = inject(Store<AppState>);
@@ -16,7 +16,9 @@ export class FavoriteOffersService {
 
   public toggleFavoriteStatus(offerId: string, isFavorite: boolean) {
     if (this.authStatus() === AuthorizationStatus.AUTH) {
-      this.store.dispatch(toggleFavoriteStatus({offerId, isFavorite: !isFavorite}));
+      this.store.dispatch(
+        toggleFavoriteStatus({ offerId, isFavorite: !isFavorite }),
+      );
     } else {
       this.router.navigate(['/login']);
     }

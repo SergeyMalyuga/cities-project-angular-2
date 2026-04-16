@@ -4,7 +4,10 @@ import {createReducer, on} from '@ngrx/store';
 import {
   loadFavoriteOffers,
   loadFavoritesOffersFailure,
-  loadFavoritesOffersSuccess, toggleFavoriteStatus, toggleFavoriteStatusFailure, toggleFavoriteStatusSuccess
+  loadFavoritesOffersSuccess,
+  toggleFavoriteStatus,
+  toggleFavoriteStatusFailure,
+  toggleFavoriteStatusSuccess,
 } from './actions/favorite-offer.actions';
 import {FavoriteOffersState} from '../../core/models/favorite-offers.state';
 
@@ -16,26 +19,44 @@ const initialState: FavoriteOffersState = favoriteOfferAdapter.getInitialState({
 
 export const favoriteOffersReducer = createReducer(
   initialState,
-  on(loadFavoriteOffers, state => ({
-    ...state, isLoading: true
+  on(loadFavoriteOffers, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(loadFavoritesOffersSuccess, (state, {offers}) =>
-    favoriteOfferAdapter.setAll(offers, {...state, isLoading: false, error: null}),
+  on(loadFavoritesOffersSuccess, (state, { offers }) =>
+    favoriteOfferAdapter.setAll(offers, {
+      ...state,
+      isLoading: false,
+      error: null,
+    }),
   ),
-  on(loadFavoritesOffersFailure, (state, {error}) => ({
-    ...state, isLoading: false, error
+  on(loadFavoritesOffersFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
   })),
-  on(toggleFavoriteStatus, state => ({
-    ...state, isLoading: true
+  on(toggleFavoriteStatus, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(toggleFavoriteStatusSuccess, (state, {offer}) => {
+  on(toggleFavoriteStatusSuccess, (state, { offer }) => {
     if (offer.isFavorite) {
-      return favoriteOfferAdapter.addOne(offer, {...state, isLoading: false, error: null});
+      return favoriteOfferAdapter.addOne(offer, {
+        ...state,
+        isLoading: false,
+        error: null,
+      });
     } else {
-      return favoriteOfferAdapter.removeOne(offer.id, {...state, isLoading: false, error: null});
+      return favoriteOfferAdapter.removeOne(offer.id, {
+        ...state,
+        isLoading: false,
+        error: null,
+      });
     }
   }),
-  on(toggleFavoriteStatusFailure, (state, {error}) => ({
-    ...state, isLoading: false, error
-  }))
-)
+  on(toggleFavoriteStatusFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  })),
+);

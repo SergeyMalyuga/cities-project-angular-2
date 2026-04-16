@@ -1,14 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, inject, Output} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Output,} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {NewComment} from '../../core/models/new-comment';
 
 @Component({
   selector: 'app-reviews-form',
-  imports: [
-    ReactiveFormsModule
-  ],
+  imports: [ReactiveFormsModule],
   templateUrl: './reviews-form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewsFormComponent {
   @Output() submitted = new EventEmitter<NewComment>();
@@ -22,8 +20,8 @@ export class ReviewsFormComponent {
 
   public onSubmit() {
     if (this.reviewGroup.valid) {
-      const {comment, rating} = this.reviewGroup.value;
-      this.submitted.emit({comment, rating});
+      const { comment, rating } = this.reviewGroup.value;
+      this.submitted.emit({ comment, rating });
       this.reviewGroup.reset();
     }
   }

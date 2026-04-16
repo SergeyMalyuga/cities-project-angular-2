@@ -8,7 +8,9 @@ import {
   login,
   loginFailure,
   loginSuccess,
-  logout, logoutFailure, logoutSuccess
+  logout,
+  logoutFailure,
+  logoutSuccess,
 } from './actions/user.actions';
 
 const initialState: UserState = {
@@ -16,33 +18,57 @@ const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isLoading: false,
   error: null,
-}
+};
 
-export const userReducer = createReducer(initialState,
-  on(checkAuth, state => ({
-    ...state, isLoading: true
+export const userReducer = createReducer(
+  initialState,
+  on(checkAuth, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(checkAuthSuccess, (state, {user}) => ({
-    ...state, user, isLoading: false, error: null, authorizationStatus: AuthorizationStatus.AUTH
+  on(checkAuthSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    isLoading: false,
+    error: null,
+    authorizationStatus: AuthorizationStatus.AUTH,
   })),
-  on(checkAuthFailure, (state, {error}) => ({
-    ...state, isLoading: false, error, authorizationStatus: AuthorizationStatus.UN_AUTH
+  on(checkAuthFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+    authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
-  on(login, state => ({
-    ...state, isLoading: true
+  on(login, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(loginSuccess, (state, {user}) => ({
-    ...state, user, isLoading: false, error: null, authorizationStatus: AuthorizationStatus.AUTH
+  on(loginSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    isLoading: false,
+    error: null,
+    authorizationStatus: AuthorizationStatus.AUTH,
   })),
-  on(loginFailure, (state, {error}) => ({
-    ...state, isLoading: false, error, authorizationStatus: AuthorizationStatus.AUTH
-  })), on(logout, state => ({
-    ...state, isLoading: true
+  on(loginFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+    authorizationStatus: AuthorizationStatus.AUTH,
   })),
-  on(logoutSuccess, state => ({
-    ...state, user: DEFAULT_USER, isLoading: false, authorizationStatus: AuthorizationStatus.UN_AUTH
+  on(logout, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(logoutFailure, (state, {error}) => ({
-    ...state, isLoading: false, error
-  }))
+  on(logoutSuccess, (state) => ({
+    ...state,
+    user: DEFAULT_USER,
+    isLoading: false,
+    authorizationStatus: AuthorizationStatus.UN_AUTH,
+  })),
+  on(logoutFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  })),
 );
