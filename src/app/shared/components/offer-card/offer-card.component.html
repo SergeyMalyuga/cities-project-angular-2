@@ -22,8 +22,11 @@
         <span class="place-card__price-text">&#47;&nbsp;night</span>
       </div>
       <button
+        (click)="changeFavoriteStatus()"
         class="place-card__bookmark-button button"
+        [class.place-card__bookmark-button--active] = "authStatus() === AuthorizationStatus.AUTH && offer.isFavorite"
         type="button"
+        [disabled]="isFavoriteOfferLoading()"
       >
         <svg
           class="place-card__bookmark-icon"

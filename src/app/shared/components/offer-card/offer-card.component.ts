@@ -1,9 +1,14 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {OfferPreview} from '../../../core/models/offers';
 import {TitleCasePipe} from '@angular/common';
 import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
 import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../../core/constants/const';
+import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
+import {State, Store} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
+import {FavoriteOffersService} from '../../../core/services/favorite-offers.service';
+import {selectIsFavoriteOffersIsLoading} from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
 
 @Component({
   selector: 'app-offer-card',
@@ -18,7 +23,14 @@ import {AppRoute} from '../../../core/constants/const';
 export class OfferCardComponent {
   @Output() hovered = new EventEmitter<OfferPreview | null>();
   @Input({required: true}) offer!: OfferPreview;
-  protected readonly Math = Math;
+
+  private store = inject(Store<AppState>);
+  private favoriteOfferService = inject(FavoriteOffersService);
+
+  public readonly Math = Math;
+  public readonly AppRoute = AppRoute;
+  public authStatus = this.store.selectSignal(selectAuthStatus);
+  public isFavoriteOfferLoading = this.store.selectSignal(selectIsFavoriteOffersIsLoading);
 
   public onHovered(isHover: boolean): void {
     if (isHover) {
@@ -28,5 +40,9 @@ export class OfferCardComponent {
     }
   }
 
-  protected readonly AppRoute = AppRoute;
+  public changeFavoriteStatus() {
+    this.favoriteOfferService.toggleFavoriteStatus(this.offer);
+  }
+
+  protected readonly AuthorizationStatus = AuthorizationStatus;
 }
