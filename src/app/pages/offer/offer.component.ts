@@ -4,16 +4,24 @@ import {Offer, OfferPreview} from '../../core/models/offers';
 import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, combineLatest, distinctUntilChanged, EMPTY, filter, map, merge, of, Subject, switchMap} from 'rxjs';
 import {OfferService} from '../../core/services/offer.service';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {SlicePipe, TitleCasePipe} from '@angular/common';
 import {ReviewsComponent} from '../../features/reviews/reviews.component';
 import {ReviewsService} from '../../core/services/comment.service';
 import {Comment} from '../../core/models/comments';
 import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
 import {MapComponent} from '../../shared/components/map/map.component';
-import {DEFAULT_CITY} from '../../core/constants/const';
+import {AuthorizationStatus, DEFAULT_CITY} from '../../core/constants/const';
 import {NewComment} from '../../core/models/new-comment';
 import {LoaderComponent} from '../../shared/components/loader/loader.component';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
+import {
+  selectIsFavoriteOffer,
+  selectIsFavoriteOffersIsLoading
+} from '../../store/favorite-offer/selectors/favorite-offer.selectors';
+import {FavoriteOffersService} from '../../core/services/favorite-offers.service';
 
 @Component({
   selector: 'app-offer',
@@ -27,6 +35,8 @@ export class OfferComponent implements OnInit {
   private reviewsService = inject(ReviewsService)
   private refreshReviews$ = new Subject<void>();
   private destroyRef = inject(DestroyRef);
+  private store = inject(Store<AppState>);
+  private favoriteOfferService = inject(FavoriteOffersService);
 
   public offer = signal<Offer | null>(null);
   public neighborOffers = signal<OfferPreview[]>([]);
@@ -34,6 +44,10 @@ export class OfferComponent implements OnInit {
   public comments = signal<Comment[]>([]);
   public readonly Math = Math;
   public readonly DEFAULT_CITY = DEFAULT_CITY;
+  public readonly AuthorizationStatus = AuthorizationStatus;
+  public authStatus = this.store.selectSignal(selectAuthStatus);
+  public isFavorite = toSignal(toObservable(this.offerId).pipe(switchMap(id => id ? this.store.select(selectIsFavoriteOffer(id)) : of(false))), {initialValue: false});
+  public isFavoriteOffersLoading = this.store.selectSignal(selectIsFavoriteOffersIsLoading);
 
   public ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(map(params =>
@@ -71,6 +85,13 @@ export class OfferComponent implements OnInit {
     const id = this.offerId();
     if (id) {
       this.reviewsService.postComment(comment.comment, Number(comment.rating), id).subscribe(() => this.refreshReviews$.next());
+    }
+  }
+
+  public changeFavoriteStatus() {
+    const offer = this.offer();
+    if (offer) {
+      this.favoriteOfferService.toggleFavoriteStatus(offer.id, this.isFavorite())
     }
   }
 }

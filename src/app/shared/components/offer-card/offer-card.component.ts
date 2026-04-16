@@ -41,7 +41,7 @@ export class OfferCardComponent {
   }
 
   public changeFavoriteStatus() {
-    this.favoriteOfferService.toggleFavoriteStatus(this.offer);
+    this.favoriteOfferService.toggleFavoriteStatus(this.offer.id, this.offer.isFavorite);
   }
 
   protected readonly AuthorizationStatus = AuthorizationStatus;

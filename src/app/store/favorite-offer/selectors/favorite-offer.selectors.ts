@@ -14,3 +14,10 @@ export const selectIsFavoriteOffersIsLoading = createSelector(
   selectFavoriteOfferState,
   state => state.isLoading
 )
+
+export const selectIsFavoriteOffer = (id: string) =>
+  createSelector(
+    selectFavoriteOfferState,
+    state => state.entities[id]?.isFavorite ? true : false
+  )
+
