@@ -1,25 +1,37 @@
 <article
   appHoverTracker
   (hovered)="onHovered($event)"
-  class="cities__card place-card"
+  [ngClass]="{
+  'cities__card': !isFavoritePage,
+  'favorites__card': isFavoritePage,
+  }"
+  class="place-card"
 >
   @if (offer.isPremium) {
     <div class="place-card__mark">
       <span>Premium</span>
     </div>
   }
-  <div class="cities__image-wrapper place-card__image-wrapper">
-    <a [routerLink]="[AppRoute.OFFER, offer.id]">
+  <div
+    [ngClass]="{
+    'cities__image-wrapper ': !isFavoritePage,
+    'favorites__image-wrapper': isFavoritePage,
+    }"
+    class="place-card__image-wrapper">
+    <a [routerLink]="['/', AppRoute.OFFER, offer.id]"
+       [style.pointer-events]="isOfferPage ? 'none' : 'auto'">
       <img
         class="place-card__image"
         src="{{ offer.previewImage }}"
-        width="260"
-        height="200"
+        [width]="isFavoritePage ? '150' : '260'"
+        [height]="isFavoritePage ? '110' : '200'"
         alt="Place image"
       />
     </a>
   </div>
-  <div class="place-card__info">
+  <div
+    [class.favorites__card-info]="isFavoritePage"
+    class="place-card__info">
     <div class="place-card__price-wrapper">
       <div class="place-card__price">
         <b class="place-card__price-value">&euro;{{ offer.price }}</b>
@@ -31,6 +43,7 @@
         [class.place-card__bookmark-button--active]="
           authStatus() === AuthorizationStatus.AUTH && offer.isFavorite
         "
+        [class.disabled] = "isOfferPage"
         type="button"
         [disabled]="isFavoriteOfferLoading()"
       >
@@ -47,7 +60,9 @@
       </div>
     </div>
     <h2 class="place-card__name">
-      <a [routerLink]="[AppRoute.OFFER, offer.id]">{{ offer.title }}</a>
+      <a [routerLink]="['/', AppRoute.OFFER, offer.id]"
+         [style.pointer-events]="isOfferPage ? 'none' : 'auto'">
+      {{ offer.title }}</a>
     </h2>
     <p class="place-card__type">{{ offer.type | titlecase }}</p>
   </div>
