@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
 import {Store} from '@ngrx/store';
@@ -11,9 +11,11 @@ import {selectFavoriteOffersTotal} from '../../../store/favorite-offer/selectors
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
   imports: [RouterLink, AccessibilityClickDirective],
 })
 export class HeaderComponent {
+  @Input() isFavoritePage = false;
   private store = inject(Store<AppState>);
 
   public readonly AppRoute = AppRoute;
