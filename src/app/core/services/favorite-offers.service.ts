@@ -1,10 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState} from '../models/app.state';
-import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
-import {AuthorizationStatus} from '../constants/const';
-import {toggleFavoriteStatus} from '../../store/favorite-offer/actions/favorite-offer.actions';
-import {Router} from '@angular/router';
+import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../models/app.state';
+import { selectAuthStatus } from '../../store/user/selectors/user.selectors';
+import { AuthorizationStatus } from '../constants/const';
+import { toggleFavoriteStatus } from '../../store/favorite-offer/actions/favorite-offer.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',

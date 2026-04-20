@@ -1,8 +1,15 @@
-import {Directive, EventEmitter, HostListener, inject, Input, Output,} from '@angular/core';
-import {City} from '../../core/models/city';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {changeCity} from '../../store/city/actions/city.actions';
+import {
+  Directive,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
+import { City } from '../../core/models/city';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import { changeCity } from '../../store/city/actions/city.actions';
 
 @Directive({
   selector: '[appSelectCity]',

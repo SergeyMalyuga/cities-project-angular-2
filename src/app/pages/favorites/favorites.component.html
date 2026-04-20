@@ -1,5 +1,5 @@
 <div class="page">
-  <app-header [isFavoritePage]="true"/>
+  <app-header [isFavoritePage]="true" />
   <main class="page__main page__main--favorites">
     <div class="page__favorites-container container">
       @if (totalFavorites() === 0) {
@@ -17,18 +17,30 @@
           <h1 class="favorites__title">Saved listing</h1>
           <ul class="favorites__list">
             @for (city of Object.keys(sortedFavoriteOffers()); track city) {
-              @if (isKeyOfSortedFavoriteOffers(city) && sortedFavoriteOffers()[city].length > 0) {
+              @if (
+                isKeyOfSortedFavoriteOffers(city) &&
+                sortedFavoriteOffers()[city].length > 0
+              ) {
                 <li class="favorites__locations-items">
-                  <div class="favorites__locations locations locations--current">
+                  <div
+                    class="favorites__locations locations locations--current"
+                  >
                     <div class="locations__item">
                       <a class="locations__item-link" href="#">
-                        <span>{{city | titlecase}}</span>
+                        <span>{{ city | titlecase }}</span>
                       </a>
                     </div>
                   </div>
                   <div class="favorites__places">
-                    @for (offer of sortedFavoriteOffers()[city]; track offer.id) {
-                      <app-offer-card class="favorites__card place-card" [offer]="offer" [isFavoritePage]="true"/>
+                    @for (
+                      offer of sortedFavoriteOffers()[city];
+                      track offer.id
+                    ) {
+                      <app-offer-card
+                        class="favorites__card place-card"
+                        [offer]="offer"
+                        [isFavoritePage]="true"
+                      />
                     }
                   </div>
                 </li>
@@ -36,7 +48,6 @@
             }
           </ul>
         </section>
-
       }
     </div>
   </main>

@@ -1,14 +1,21 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output,} from '@angular/core';
-import {OfferPreview} from '../../../core/models/offers';
-import {NgClass, TitleCasePipe} from '@angular/common';
-import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
-import {RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/models/app.state';
-import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
-import {FavoriteOffersService} from '../../../core/services/favorite-offers.service';
-import {selectIsFavoriteOffersIsLoading} from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
+import { OfferPreview } from '../../../core/models/offers';
+import { NgClass, TitleCasePipe } from '@angular/common';
+import { HoverTrackerDirective } from '../../directives/hover-tracker.directive';
+import { RouterLink } from '@angular/router';
+import { AppRoute, AuthorizationStatus } from '../../../core/constants/const';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/models/app.state';
+import { selectAuthStatus } from '../../../store/user/selectors/user.selectors';
+import { FavoriteOffersService } from '../../../core/services/favorite-offers.service';
+import { selectIsFavoriteOffersIsLoading } from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
 
 @Component({
   selector: 'app-offer-card',
@@ -19,7 +26,7 @@ import {selectIsFavoriteOffersIsLoading} from '../../../store/favorite-offer/sel
 })
 export class OfferCardComponent {
   @Output() hovered = new EventEmitter<OfferPreview | null>();
-  @Input({required: true}) offer!: OfferPreview;
+  @Input({ required: true }) offer!: OfferPreview;
   @Input() isFavoritePage = false;
   @Input() isOfferPage = false;
 

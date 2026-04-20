@@ -9,8 +9,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import * as L from 'leaflet';
-import {City} from '../../../core/models/city';
-import {OfferPreview} from '../../../core/models/offers';
+import { City } from '../../../core/models/city';
+import { OfferPreview } from '../../../core/models/offers';
 
 @Component({
   selector: 'app-map',

@@ -1,18 +1,27 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus, CITY_LOCATIONS,} from '../../core/constants/const';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
-import {Credentials} from '../../core/models/credentials';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {login} from '../../store/user/actions/user.actions';
-import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
-import {filter, take} from 'rxjs';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {loadOffers} from '../../store/offer/actions/offer.actions';
-import {City} from '../../core/models/city';
-import {SelectCityDirective} from '../../shared/directives/select-city.directive';
-import {loadFavoriteOffers} from '../../store/favorite-offer/actions/favorite-offer.actions';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import {
+  AppRoute,
+  AuthorizationStatus,
+  CITY_LOCATIONS,
+} from '../../core/constants/const';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Credentials } from '../../core/models/credentials';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import { login } from '../../store/user/actions/user.actions';
+import { selectAuthStatus } from '../../store/user/selectors/user.selectors';
+import { filter, take } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { loadOffers } from '../../store/offer/actions/offer.actions';
+import { City } from '../../core/models/city';
+import { SelectCityDirective } from '../../shared/directives/select-city.directive';
+import { loadFavoriteOffers } from '../../store/favorite-offer/actions/favorite-offer.actions';
 
 @Component({
   selector: 'app-login',

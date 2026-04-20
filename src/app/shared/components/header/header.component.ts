@@ -1,12 +1,15 @@
-import {Component, inject, Input} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/models/app.state';
-import {selectAuthStatus, selectUserEmail,} from '../../../store/user/selectors/user.selectors';
-import {AccessibilityClickDirective} from '../../directives/accessibility-click.directive';
-import {logout} from '../../../store/user/actions/user.actions';
-import {selectFavoriteOffersTotal} from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
+import { Component, inject, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AppRoute, AuthorizationStatus } from '../../../core/constants/const';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/models/app.state';
+import {
+  selectAuthStatus,
+  selectUserEmail,
+} from '../../../store/user/selectors/user.selectors';
+import { AccessibilityClickDirective } from '../../directives/accessibility-click.directive';
+import { logout } from '../../../store/user/actions/user.actions';
+import { selectFavoriteOffersTotal } from '../../../store/favorite-offer/selectors/favorite-offer.selectors';
 
 @Component({
   selector: 'app-header',

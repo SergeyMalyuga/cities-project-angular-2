@@ -1,10 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {User} from '../models/user';
-import {HttpClient} from '@angular/common/http';
-import {APIRoute, BASE_URL} from '../constants/const';
-import {Credentials} from '../models/credentials';
-import {defaultHttpPipe} from '../../utils/rxjs-operators';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
+import { APIRoute, BASE_URL } from '../constants/const';
+import { Credentials } from '../models/credentials';
+import { defaultHttpPipe } from '../../utils/rxjs-operators';
 
 @Injectable({
   providedIn: 'root',

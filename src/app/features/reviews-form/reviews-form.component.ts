@@ -1,6 +1,17 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, inject, Output,} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
-import {NewComment} from '../../core/models/new-comment';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { NewComment } from '../../core/models/new-comment';
 
 @Component({
   selector: 'app-reviews-form',

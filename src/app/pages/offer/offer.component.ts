@@ -1,7 +1,7 @@
-import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
-import {HeaderComponent} from '../../shared/components/header/header.component';
-import {Offer, OfferPreview} from '../../core/models/offers';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { Offer, OfferPreview } from '../../core/models/offers';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   catchError,
   combineLatest,
@@ -14,25 +14,29 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import {OfferService} from '../../core/services/offer.service';
-import {takeUntilDestroyed, toObservable, toSignal,} from '@angular/core/rxjs-interop';
-import {SlicePipe, TitleCasePipe} from '@angular/common';
-import {ReviewsComponent} from '../../features/reviews/reviews.component';
-import {ReviewsService} from '../../core/services/comment.service';
-import {Comment} from '../../core/models/comments';
-import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
-import {MapComponent} from '../../shared/components/map/map.component';
-import {AuthorizationStatus, DEFAULT_CITY} from '../../core/constants/const';
-import {NewComment} from '../../core/models/new-comment';
-import {LoaderComponent} from '../../shared/components/loader/loader.component';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
+import { OfferService } from '../../core/services/offer.service';
+import {
+  takeUntilDestroyed,
+  toObservable,
+  toSignal,
+} from '@angular/core/rxjs-interop';
+import { SlicePipe, TitleCasePipe } from '@angular/common';
+import { ReviewsComponent } from '../../features/reviews/reviews.component';
+import { ReviewsService } from '../../core/services/comment.service';
+import { Comment } from '../../core/models/comments';
+import { OfferCardComponent } from '../../shared/components/offer-card/offer-card.component';
+import { MapComponent } from '../../shared/components/map/map.component';
+import { AuthorizationStatus, DEFAULT_CITY } from '../../core/constants/const';
+import { NewComment } from '../../core/models/new-comment';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import { selectAuthStatus } from '../../store/user/selectors/user.selectors';
 import {
   selectIsFavoriteOffer,
   selectIsFavoriteOffersIsLoading,
 } from '../../store/favorite-offer/selectors/favorite-offer.selectors';
-import {FavoriteOffersService} from '../../core/services/favorite-offers.service';
+import { FavoriteOffersService } from '../../core/services/favorite-offers.service';
 
 @Component({
   selector: 'app-offer',

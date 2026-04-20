@@ -16,13 +16,16 @@
         <ul class="header__nav-list">
           <li class="header__nav-item user">
             @if (authStatus() === AuthorizationStatus.AUTH) {
-              <a class="header__nav-link header__nav-link--profile" [routerLink]="[AppRoute.FAVORITES]"
-                 [class.disabled]="isFavoritePage">
+              <a
+                class="header__nav-link header__nav-link--profile"
+                [routerLink]="[AppRoute.FAVORITES]"
+                [class.disabled]="isFavoritePage"
+              >
                 <div class="header__avatar-wrapper user__avatar-wrapper"></div>
                 <span class="header__user-name user__name">{{ email() }}</span>
                 <span class="header__favorite-count">{{
-                    favoriteOffersTotal()
-                  }}</span>
+                  favoriteOffersTotal()
+                }}</span>
               </a>
             }
           </li>
@@ -38,8 +41,8 @@
               (accessibilityClicked)="signOut()"
             >
               <span class="header__signout">{{
-                  authStatus() === AuthorizationStatus.AUTH ? "Sign out" : "Login"
-                }}</span>
+                authStatus() === AuthorizationStatus.AUTH ? "Sign out" : "Login"
+              }}</span>
             </a>
           </li>
         </ul>
