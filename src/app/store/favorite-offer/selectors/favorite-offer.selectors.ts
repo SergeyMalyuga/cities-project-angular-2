@@ -20,3 +20,8 @@ export const selectIsFavoriteOffer = (id: string) =>
   createSelector(selectFavoriteOfferState, (state) =>
     state.entities[id]?.isFavorite ? true : false,
   );
+
+export const selectFavoriteOffers = createSelector(
+  selectFavoriteOfferState,
+  favoriteOfferSelectors.selectAll,
+)
