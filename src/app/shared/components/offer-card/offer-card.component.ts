@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output,} from '@angular/core';
 import {OfferPreview} from '../../../core/models/offers';
-import {TitleCasePipe} from '@angular/common';
+import {NgClass, TitleCasePipe} from '@angular/common';
 import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
 import {RouterLink} from '@angular/router';
 import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
@@ -12,13 +12,16 @@ import {selectIsFavoriteOffersIsLoading} from '../../../store/favorite-offer/sel
 
 @Component({
   selector: 'app-offer-card',
-  imports: [TitleCasePipe, HoverTrackerDirective, RouterLink],
+  imports: [TitleCasePipe, HoverTrackerDirective, RouterLink, NgClass],
   templateUrl: './offer-card.component.html',
+  styleUrl: './offer-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent {
   @Output() hovered = new EventEmitter<OfferPreview | null>();
-  @Input({ required: true }) offer!: OfferPreview;
+  @Input({required: true}) offer!: OfferPreview;
+  @Input() isFavoritePage = false;
+  @Input() isOfferPage = false;
 
   private store = inject(Store<AppState>);
   private favoriteOfferService = inject(FavoriteOffersService);
